@@ -1,0 +1,36 @@
+Zookeeper
+/kafka_2.13-3.5.0$ sudo bin/zookeeper-server-stop.sh
+kafka_2.13-3.5.0$ bin/zookeeper-server-start.sh config/zookeeper.properties
+
+//server
+/kafka_2.13-3.5.0$ bin/kafka-server-start.sh config/server.properties
+
+//topic
+kafka_2.13-3.5.0$ bin/kafka-topics.sh --create --topic json --bootstrap-server localhost:9092
+
+//producer
+kafka_2.13-3.5.0$ bin/kafka-console-producer.sh --topic json --bootstrap-server localhost:9092
+
+//consumer
+kafka_2.13-3.5.0$ bin/kafka-console-consumer.sh --topic json --from-beginning --bootstrap-server localhost:9092
+
+#windowing 
+nc -lk 9999
+./spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1 /home/xs354-riygup/kafka/producer.py localhost:9999
+
+#spark
+spark/spark-3.3.1-bin-hadoop3/bin$ ./spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1 /home/xs354-riygup/TASKS/kafka/producer.py
+
+#avro
+ ./spark-submit --packages "org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.1,org.apache.spark:spark-avro_2.12:3.3.1" /home/xs354-riygup/TASKS/kafka/avroData.py
+
+#protobuf
+ ./spark-submit --packages "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1,org.apache.spark:spark-protobuf_2.12:3.4.1" /home/xs354-riygup/TASKS/kafka/avroData.py
+ //descriptor file
+  protoc --descriptor_set_out=person.desc person.proto
+
+#delta
+./spark-submit --packages "org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.1,io.delta:delta-core_2.12:2.3.0" /home/xs354-riygup/TASKS/implementation_kafka/producer.py
+
+#postgres
+./spark-submit --driver-class-path /home/xs354-riygup/postgresql-42.2.14.jar --packages "org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.1,org.postgresql:postgresql:42.2.6" /home/xs354-riygup/TASKS/finalTask/producer.py
