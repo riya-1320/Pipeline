@@ -1,1 +1,1 @@
-
+![Uploading turbineDashboard.jpg…]()
